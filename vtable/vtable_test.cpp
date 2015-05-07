@@ -15,6 +15,10 @@ public:
     {
         cout<<"A::bar\n";
     }
+    static void siva()
+    {
+        cout<<"A::siva\n";
+    }
     ~A(){}
 };
 int A::i = 0;
@@ -22,13 +26,17 @@ class B : public A {
 public:
     B() {cout<<"B constructor called\n";}
     int c;
-    virtual void foo()
+    virtual void foo() override
     {
         cout<<"B::foo()\n";
     }
     virtual void bar()
     {
         cout<<"B::bar\n";
+    }
+    static void siva()
+    {
+        cout<<"B::siva\n";
     }
     ~B(){}
 };
@@ -46,4 +54,5 @@ int main()
     cout<<p<<","<<&p->a<<","<<&p->b<<","<<&p->i<<","<<&((B*)p)->c<<endl;
     p->foo();
     p->bar();
+    p->siva();
 }
