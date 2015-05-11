@@ -10,7 +10,7 @@ public:
 
 void foo()
 {
-    unique_ptr<Test> ptr {new Test()};
+    unique_ptr<Test> ptr {new Test};
     cout<<"foo running\n";
 }
 
