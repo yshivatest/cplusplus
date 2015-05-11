@@ -38,6 +38,7 @@ public:
             head = temp;
         }
     }
+
     template<typename xdata> friend ostream& operator<<(std::ostream& out, const LinkedList<xdata>& ll);
 };
 template<typename data>

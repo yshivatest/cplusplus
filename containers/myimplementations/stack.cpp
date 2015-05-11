@@ -34,7 +34,7 @@ public:
     Data pop()
     {
         if (!top)
-            throw out_of_range("Stack::pop");
+            throw out_of_range("Stack::pop() top is NULL");
         auto x = top->x;
         top = top->next;
         return x;
@@ -61,4 +61,5 @@ int main()
     cout<<x;
     x.pop();x.pop();
     cout<<x;
+    x.pop();
 }
