@@ -2,15 +2,17 @@
 #include<stdexcept>
 using namespace std;
 
-template<typename Sdata>
+template<typename Data>
 class Stack {
-    template<typename Ndata>
-    struct Node {
-        Ndata x;
-        Node<Ndata> *next;
-    };
-    Node<Sdata> *top;
 public:
+    struct Node {
+        Data x;
+        Node *next;
+        Node(Data d, Node *n=nullptr) : x{d}, next{n}
+        {      
+        }
+    };
+    Node *top;
     Stack()
     {
         top = nullptr;
@@ -23,29 +25,27 @@ public:
             delete x;
         }
     }
-    void push(Sdata x)
+    void push(Data x)
     {
-        auto temp = new Node<Sdata>();
-        temp->x = x;
-        temp->next = top;
+        auto temp = new Node(x,top);
         top = temp;
     }
-    Sdata pop()
+
+    Data pop()
     {
-        if (top) {
-            auto temp = top->x;
-            top = top->next;
-            return temp;
-        } else {
+        if (!top)
             throw out_of_range("Stack::pop");
-        }
+        auto x = top->x;
+        top = top->next;
+        return x;
     }
-    template<typename Odata> friend ostream& operator<<(ostream& out, const Stack<Odata>& st);
+    template<typename Tdata> friend ostream& operator<<(ostream& out, const Stack<Tdata>& x);
 };
-template<typename Sdata>
-ostream& operator<<(ostream& out, const Stack<Sdata>& st)
+
+template<typename Tdata>
+ostream& operator<<(ostream& out, const Stack<Tdata>& x)
 {
-    auto temp = st.top;
+    auto temp = x.top;
     while(temp) {
         out<<temp->x<<",";
         temp = temp->next;
@@ -57,10 +57,8 @@ ostream& operator<<(ostream& out, const Stack<Sdata>& st)
 int main()
 {
     Stack<int> x;
-    x.push(1);
-    x.push(2);
+    x.push(1); x.push(2);
     cout<<x;
-    x.pop();
-    x.pop();
+    x.pop();x.pop();
     cout<<x;
 }
